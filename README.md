@@ -119,6 +119,29 @@ docker build -t universal-validator-api .
 docker run --rm -p 8080:8080 universal-validator-api
 ```
 
+## API desplegada en Render
+
+La API está disponible públicamente en:
+
+`https://universalvalidatorapi.onrender.com`
+
+Puedes comprobar el estado y los tipos soportados:
+
+```bash
+curl https://universalvalidatorapi.onrender.com/health
+curl https://universalvalidatorapi.onrender.com/api/v1/validate/types
+```
+
+Para validar un dato, envía una petición `POST` con `type` y `value`:
+
+```bash
+curl -X POST https://universalvalidatorapi.onrender.com/api/v1/validate \
+  -H "Content-Type: application/json" \
+  -d '{"type":"email","value":"alumno@gmail.com"}'
+```
+
+La instancia gratuita de Render puede entrar en reposo tras un período sin tráfico. La primera petición después de ese reposo puede tardar 50 segundos o más mientras el servicio vuelve a iniciar.
+
 ## Contrato de errores
 
 - `200`: validación ejecutada. El campo `valid` indica el resultado.
